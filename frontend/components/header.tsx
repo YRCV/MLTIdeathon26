@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import Link from "next/link"
+import { Link } from "react-router-dom"
 import { Search, Menu, X, User, Plus, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -11,10 +11,10 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/80">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-card">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center gap-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-primary">
             <span className="text-lg font-bold text-primary-foreground">C</span>
           </div>
@@ -40,20 +40,22 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden items-center gap-2 md:flex">
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/browse">Browse</Link>
+            <Link to="/browse">Browse</Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/how-it-works">How It Works</Link>
+            <Link to="/how-it-works">How It Works</Link>
           </Button>
           <Button variant="ghost" size="sm" asChild>
-            <Link href="/messages" className="flex items-center gap-1">
+            <Link to="/messages" className="flex items-center gap-1">
               <MessageCircle className="h-4 w-4" />
               <span>Messages</span>
             </Link>
           </Button>
-          <Button size="sm" className="gap-1">
-            <Plus className="h-4 w-4" />
-            <span>List Item</span>
+          <Button size="sm" className="gap-1" asChild>
+            <Link to="/list">
+              <Plus className="h-4 w-4" />
+              <span>List Item</span>
+            </Link>
           </Button>
           <Button variant="outline" size="icon" className="ml-2">
             <User className="h-4 w-4" />
@@ -86,22 +88,24 @@ export function Header() {
               {/* Mobile Nav Links */}
               <nav className="flex flex-col gap-2">
                 <Button variant="ghost" className="justify-start" asChild>
-                  <Link href="/browse">Browse All</Link>
+                  <Link to="/browse">Browse All</Link>
                 </Button>
                 <Button variant="ghost" className="justify-start" asChild>
-                  <Link href="/how-it-works">How It Works</Link>
+                  <Link to="/how-it-works">How It Works</Link>
                 </Button>
                 <Button variant="ghost" className="justify-start" asChild>
-                  <Link href="/messages">Messages</Link>
+                  <Link to="/messages">Messages</Link>
                 </Button>
                 <Button variant="ghost" className="justify-start" asChild>
-                  <Link href="/account">My Account</Link>
+                  <Link to="/account">My Account</Link>
                 </Button>
               </nav>
 
-              <Button className="w-full gap-2">
-                <Plus className="h-4 w-4" />
-                List an Item
+              <Button className="w-full gap-2" asChild>
+                <Link to="/list">
+                  <Plus className="h-4 w-4" />
+                  List an Item
+                </Link>
               </Button>
             </div>
           </SheetContent>

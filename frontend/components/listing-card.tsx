@@ -1,8 +1,6 @@
-"use client"
-
 import { useState } from "react"
-import Image from "next/image"
-import { Heart, MapPin, Clock } from "lucide-react"
+import { useNavigate } from "react-router-dom"
+import { Heart, MapPin, Clock, Repeat } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -20,6 +18,7 @@ interface ListingCardProps {
 }
 
 export function ListingCard({
+  id,
   title,
   price,
   image,
@@ -30,6 +29,7 @@ export function ListingCard({
   onClick,
 }: ListingCardProps) {
   const [isLiked, setIsLiked] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <article
@@ -38,14 +38,12 @@ export function ListingCard({
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-secondary">
-        <Image
+        <img
           src={image}
           alt={title}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
-        
+
         {/* Like Button */}
         <Button
           variant="ghost"
@@ -82,11 +80,11 @@ export function ListingCard({
           </h3>
         </div>
 
-        <p className="mb-3 text-lg font-semibold text-primary">
-          {isFree ? "Free" : `$${price}`}
-        </p>
+        {isFree && (
+          <p className="mb-3 text-lg font-semibold text-primary">Free</p>
+        )}
 
-        <div className="mt-auto flex items-center gap-3 text-sm text-muted-foreground">
+        <div className="mb-4 flex items-center gap-3 text-sm text-muted-foreground">
           <span className="flex items-center gap-1">
             <MapPin className="h-3.5 w-3.5" />
             {location}
@@ -96,6 +94,18 @@ export function ListingCard({
             {timeAgo}
           </span>
         </div>
+
+        <Button
+          size="sm"
+          className="mt-auto w-full gap-2"
+          onClick={(e) => {
+            e.stopPropagation()
+            navigate(`/trade/${id}`)
+          }}
+        >
+          <Repeat className="h-4 w-4" />
+          Trade
+        </Button>
       </div>
     </article>
   )

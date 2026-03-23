@@ -1,8 +1,5 @@
-"use client"
-
 import { useState } from "react"
-import Image from "next/image"
-import { Heart, MapPin, Clock, MessageCircle, Share2, ChevronLeft, ChevronRight, X, User } from "lucide-react"
+import { Heart, MapPin, Clock, MessageCircle, Share2, ChevronLeft, ChevronRight, User } from "lucide-react"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -59,11 +56,10 @@ export function ListingModal({ listing, open, onOpenChange }: ListingModalProps)
         <div className="grid md:grid-cols-2 gap-0">
           {/* Image Gallery */}
           <div className="relative aspect-square bg-secondary">
-            <Image
+            <img
               src={listing.images[currentImageIndex]}
               alt={`${listing.title} - Image ${currentImageIndex + 1}`}
-              fill
-              className="object-cover"
+              className="h-full w-full object-cover"
             />
             
             {listing.images.length > 1 && (
@@ -135,10 +131,10 @@ export function ListingModal({ listing, open, onOpenChange }: ListingModalProps)
               </div>
             </div>
 
-            {/* Price */}
-            <p className="text-3xl font-bold text-primary mb-4">
-              {listing.isFree ? "Free" : `$${listing.price}`}
-            </p>
+            {/* Free badge */}
+            {listing.isFree && (
+              <p className="text-3xl font-bold text-primary mb-4">Free</p>
+            )}
 
             {/* Meta Info */}
             <div className="flex flex-wrap gap-4 text-sm text-muted-foreground mb-6">

@@ -1,11 +1,8 @@
-"use client"
-
 import { useState } from "react"
-import { ChevronDown, X } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
-import { Slider } from "@/components/ui/slider"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { Badge } from "@/components/ui/badge"
 
@@ -14,7 +11,6 @@ interface FilterSidebarProps {
 }
 
 export interface FilterState {
-  priceRange: [number, number]
   conditions: string[]
   categories: string[]
   sortBy: string
@@ -33,37 +29,26 @@ const categories = [
 ]
 
 export function FilterSidebar({ onFiltersChange }: FilterSidebarProps) {
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 500])
   const [selectedConditions, setSelectedConditions] = useState<string[]>([])
   const [selectedCategories, setSelectedCategories] = useState<string[]>([])
 
-  const activeFiltersCount = selectedConditions.length + selectedCategories.length + (priceRange[0] > 0 || priceRange[1] < 500 ? 1 : 0)
+  const activeFiltersCount = selectedConditions.length + selectedCategories.length
 
   const clearAllFilters = () => {
-    setPriceRange([0, 500])
     setSelectedConditions([])
     setSelectedCategories([])
-    onFiltersChange?.({
-      priceRange: [0, 500],
-      conditions: [],
-      categories: [],
-      sortBy: "recent",
-    })
+    onFiltersChange?.({ conditions: [], categories: [], sortBy: "recent" })
   }
 
   const toggleCondition = (condition: string) => {
     setSelectedConditions((prev) =>
-      prev.includes(condition)
-        ? prev.filter((c) => c !== condition)
-        : [...prev, condition]
+      prev.includes(condition) ? prev.filter((c) => c !== condition) : [...prev, condition]
     )
   }
 
   const toggleCategory = (category: string) => {
     setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category]
     )
   }
 
@@ -81,34 +66,6 @@ export function FilterSidebar({ onFiltersChange }: FilterSidebarProps) {
           </Button>
         )}
       </div>
-
-      {/* Price Range */}
-      <Collapsible defaultOpen>
-        <CollapsibleTrigger className="flex w-full items-center justify-between py-2">
-          <span className="font-medium text-foreground">Price Range</span>
-          <ChevronDown className="h-4 w-4 text-muted-foreground transition-transform duration-200 [[data-state=open]>&]:rotate-180" />
-        </CollapsibleTrigger>
-        <CollapsibleContent className="pt-4">
-          <div className="space-y-4">
-            <Slider
-              value={priceRange}
-              onValueChange={(value) => setPriceRange(value as [number, number])}
-              max={500}
-              step={10}
-              className="w-full"
-            />
-            <div className="flex items-center justify-between text-sm">
-              <span className="rounded-md bg-secondary px-3 py-1 text-foreground">
-                ${priceRange[0]}
-              </span>
-              <span className="text-muted-foreground">to</span>
-              <span className="rounded-md bg-secondary px-3 py-1 text-foreground">
-                ${priceRange[1]}+
-              </span>
-            </div>
-          </div>
-        </CollapsibleContent>
-      </Collapsible>
 
       {/* Condition */}
       <Collapsible defaultOpen>

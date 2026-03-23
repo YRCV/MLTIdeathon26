@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Link } from "react-router-dom"
 
 export function Footer() {
   return (
@@ -25,22 +25,22 @@ export function Footer() {
             <h3 className="mb-4 font-semibold text-foreground">Quick Links</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/browse" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/browse" className="text-muted-foreground hover:text-foreground transition-colors">
                   Browse Items
                 </Link>
               </li>
               <li>
-                <Link href="/list" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/list" className="text-muted-foreground hover:text-foreground transition-colors">
                   List an Item
                 </Link>
               </li>
               <li>
-                <Link href="/how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/how-it-works" className="text-muted-foreground hover:text-foreground transition-colors">
                   How It Works
                 </Link>
               </li>
               <li>
-                <Link href="/safety" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/safety" className="text-muted-foreground hover:text-foreground transition-colors">
                   Safety Tips
                 </Link>
               </li>
@@ -52,22 +52,22 @@ export function Footer() {
             <h3 className="mb-4 font-semibold text-foreground">Categories</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/category/textbooks" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/category/textbooks" className="text-muted-foreground hover:text-foreground transition-colors">
                   Textbooks
                 </Link>
               </li>
               <li>
-                <Link href="/category/furniture" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/category/furniture" className="text-muted-foreground hover:text-foreground transition-colors">
                   Furniture
                 </Link>
               </li>
               <li>
-                <Link href="/category/electronics" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/category/electronics" className="text-muted-foreground hover:text-foreground transition-colors">
                   Electronics
                 </Link>
               </li>
               <li>
-                <Link href="/category/bikes" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/category/bikes" className="text-muted-foreground hover:text-foreground transition-colors">
                   Bikes & Transport
                 </Link>
               </li>
@@ -79,22 +79,22 @@ export function Footer() {
             <h3 className="mb-4 font-semibold text-foreground">Support</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link href="/help" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/help" className="text-muted-foreground hover:text-foreground transition-colors">
                   Help Center
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
+                <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">
                   Privacy Policy
                 </Link>
               </li>
