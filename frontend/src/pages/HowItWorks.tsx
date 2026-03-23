@@ -20,6 +20,153 @@ const steps = [
   { number: "05", title: "Swap & Rate", description: "Meet up, exchange items, and complete the trade. After the swap, rate your experience to help build trust in the community.", icon: Star, details: ["Meet at a safe location", "Verify item condition", "Complete the trade", "Leave an honest review"], color: "bg-primary" },
 ]
 
+const stepVisuals = [
+  // 01 — Profile card
+  <div className="w-full max-w-xs mx-auto">
+    <div className="rounded-2xl bg-card border border-border p-5 shadow-sm">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+          <span className="text-lg font-bold text-primary-foreground">A</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="font-semibold text-foreground">Alex Chen</p>
+          <p className="text-xs text-muted-foreground truncate">alex.chen@university.edu</p>
+        </div>
+        <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-medium flex-shrink-0">Verified</span>
+      </div>
+      <div className="space-y-2.5 text-sm">
+        {[
+          { label: "Campus", value: "State University" },
+          { label: "Major", value: "Computer Science" },
+          { label: "Year", value: "Junior" },
+          { label: "Trades", value: "0 completed" },
+        ].map(({ label, value }) => (
+          <div key={label} className="flex justify-between items-center">
+            <span className="text-muted-foreground">{label}</span>
+            <span className="text-foreground font-medium">{value}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-4 pt-3 border-t border-border">
+        <div className="flex justify-between mb-1.5">
+          <p className="text-xs text-muted-foreground">Profile completion</p>
+          <p className="text-xs font-medium text-foreground">75%</p>
+        </div>
+        <div className="h-2 bg-secondary rounded-full overflow-hidden">
+          <div className="h-full w-3/4 bg-primary rounded-full" />
+        </div>
+      </div>
+    </div>
+  </div>,
+
+  // 02 — Listings grid
+  <div className="w-full max-w-xs mx-auto space-y-2.5">
+    <div className="relative">
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
+      <div className="h-9 bg-card border border-border rounded-lg pl-9 flex items-center">
+        <span className="text-sm text-muted-foreground">textbooks, furniture…</span>
+      </div>
+    </div>
+    {[
+      { name: "Calculus Textbook 8e", condition: "Good", bg: "bg-blue-100" },
+      { name: "Adjustable Desk Lamp", condition: "Like New", bg: "bg-yellow-100" },
+      { name: "Compact Mini Fridge", condition: "Fair", bg: "bg-green-100" },
+      { name: "Laptop Stand + Hub", condition: "New", bg: "bg-purple-100" },
+    ].map((item) => (
+      <div key={item.name} className="flex items-center gap-3 bg-card border border-border rounded-xl p-2.5">
+        <div className={`h-11 w-11 rounded-lg ${item.bg} flex-shrink-0`} />
+        <div className="flex-1 min-w-0">
+          <p className="text-sm font-medium text-foreground truncate">{item.name}</p>
+          <p className="text-xs text-muted-foreground">My Campus · Just now</p>
+        </div>
+        <span className="text-xs bg-secondary text-muted-foreground px-2 py-0.5 rounded-full flex-shrink-0">{item.condition}</span>
+      </div>
+    ))}
+  </div>,
+
+  // 03 — Trade offer
+  <div className="w-full max-w-xs mx-auto space-y-3">
+    <p className="text-xs font-semibold text-muted-foreground text-center uppercase tracking-widest">Trade Offer</p>
+    <div className="flex items-center gap-2">
+      <div className="flex-1 bg-card border border-border rounded-xl p-3 text-center">
+        <div className="h-14 w-14 rounded-lg bg-blue-100 mx-auto mb-2" />
+        <p className="text-xs font-semibold text-foreground">Your Item</p>
+        <p className="text-xs text-muted-foreground">Calc Textbook</p>
+        <span className="mt-1 inline-block text-xs bg-secondary px-2 py-0.5 rounded-full">Good</span>
+      </div>
+      <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-primary shadow-md">
+        <Repeat className="h-4 w-4 text-primary-foreground" />
+      </div>
+      <div className="flex-1 bg-card border border-border rounded-xl p-3 text-center">
+        <div className="h-14 w-14 rounded-lg bg-yellow-100 mx-auto mb-2" />
+        <p className="text-xs font-semibold text-foreground">Their Item</p>
+        <p className="text-xs text-muted-foreground">Desk Lamp</p>
+        <span className="mt-1 inline-block text-xs bg-secondary px-2 py-0.5 rounded-full">Like New</span>
+      </div>
+    </div>
+    <div className="bg-secondary rounded-xl p-3">
+      <p className="text-xs text-muted-foreground mb-1">Your message</p>
+      <p className="text-sm text-foreground">"Hey! Would you trade your lamp for my calc textbook? It's barely used!"</p>
+    </div>
+    <div className="h-9 bg-primary rounded-xl flex items-center justify-center gap-2 cursor-pointer">
+      <ArrowRight className="h-4 w-4 text-primary-foreground" />
+      <span className="text-sm font-semibold text-primary-foreground">Send Offer</span>
+    </div>
+  </div>,
+
+  // 04 — Chat
+  <div className="w-full max-w-xs mx-auto space-y-2">
+    <div className="flex items-center gap-2 bg-card border border-border rounded-xl p-3 mb-1">
+      <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0">
+        <span className="text-xs font-bold text-primary-foreground">J</span>
+      </div>
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-foreground">Jordan</p>
+        <p className="text-xs text-emerald-600 font-medium">Active now</p>
+      </div>
+      <MessageSquare className="h-4 w-4 text-muted-foreground" />
+    </div>
+    {[
+      { text: "Hey! I accepted your offer 🎉", me: false, time: "2:14 PM" },
+      { text: "Awesome! When can we meet?", me: true, time: "2:15 PM" },
+      { text: "Library tomorrow at 3pm?", me: false, time: "2:16 PM" },
+      { text: "Sounds perfect! See you there 👋", me: true, time: "2:17 PM" },
+    ].map((msg, i) => (
+      <div key={i} className={`flex ${msg.me ? "justify-end" : "justify-start"}`}>
+        <div className={`max-w-[82%] rounded-2xl px-3 py-2 ${msg.me ? "bg-primary text-primary-foreground" : "bg-card border border-border text-foreground"}`}>
+          <p className="text-xs leading-snug">{msg.text}</p>
+          <p className={`text-[10px] mt-0.5 ${msg.me ? "text-primary-foreground/60" : "text-muted-foreground"}`}>{msg.time}</p>
+        </div>
+      </div>
+    ))}
+  </div>,
+
+  // 05 — Swap complete + rating
+  <div className="w-full max-w-xs mx-auto text-center space-y-4">
+    <div className="mx-auto h-16 w-16 rounded-full bg-emerald-100 flex items-center justify-center">
+      <Check className="h-8 w-8 text-emerald-600 stroke-[2.5]" />
+    </div>
+    <div>
+      <p className="font-bold text-foreground text-lg">Trade Complete!</p>
+      <p className="text-sm text-muted-foreground">Calculus Textbook ↔ Desk Lamp</p>
+    </div>
+    <div className="bg-card border border-border rounded-2xl p-4 text-left">
+      <p className="text-sm font-semibold text-foreground mb-1">Rate your experience</p>
+      <p className="text-xs text-muted-foreground mb-3">How was trading with Jordan?</p>
+      <div className="flex gap-1 mb-3">
+        {[1, 2, 3, 4, 5].map((i) => (
+          <Star key={i} className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+        ))}
+      </div>
+      <p className="text-xs text-muted-foreground italic border-l-2 border-primary/30 pl-2">"Great trader — item exactly as described. Super fast and friendly!"</p>
+    </div>
+    <div className="flex items-center justify-center gap-2 text-sm text-emerald-600 font-medium">
+      <Check className="h-4 w-4" />
+      <span>2 trades completed</span>
+    </div>
+  </div>,
+]
+
 const benefits = [
   { icon: Leaf, title: "Sustainable", description: "Give items a second life instead of throwing them away. Reduce waste and help the environment." },
   { icon: Users, title: "Community", description: "Connect with fellow students on your campus. Build relationships through trading." },
@@ -90,7 +237,7 @@ export default function HowItWorksPage() {
                   const contentVariant = isReversed ? slideRight : slideLeft
                   const visualVariant = isReversed ? slideLeft : slideRight
                   return (
-                    <div key={step.number} className={`flex flex-col gap-8 lg:flex-row lg:gap-16 ${isReversed ? "lg:flex-row-reverse" : ""}`}>
+                    <div key={step.number} className={`flex flex-col gap-8 lg:flex-row lg:gap-16 lg:items-center ${isReversed ? "lg:flex-row-reverse" : ""}`}>
                       <motion.div
                         className="flex-1 flex flex-col justify-center"
                         variants={contentVariant}
@@ -116,7 +263,7 @@ export default function HowItWorksPage() {
                               transition={{ delay: i * 0.08, duration: 0.35 }}
                               viewport={{ once: true }}
                             >
-                              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10">
+                              <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 flex-shrink-0">
                                 <Check className="h-3 w-3 text-primary" />
                               </div>
                               {detail}
@@ -132,19 +279,8 @@ export default function HowItWorksPage() {
                         whileInView="show"
                         viewport={{ once: true, margin: "-60px" }}
                       >
-                        <div className={`relative aspect-[4/3] rounded-2xl ${index % 2 === 0 ? "bg-secondary" : "bg-muted"} overflow-hidden`}>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <motion.div
-                              className={`p-8 rounded-2xl ${step.color}/10`}
-                              whileInView={{ scale: [0.8, 1.05, 1] }}
-                              transition={{ duration: 0.5, delay: 0.2 }}
-                              viewport={{ once: true }}
-                            >
-                              <step.icon className={`h-24 w-24 ${step.color === "bg-primary" ? "text-primary" : "text-accent"}`} />
-                            </motion.div>
-                          </div>
-                          <div className="absolute top-4 right-4 h-8 w-8 rounded-full bg-primary/20" />
-                          <div className="absolute bottom-8 left-8 h-12 w-12 rounded-full bg-accent/20" />
+                        <div className={`rounded-2xl ${index % 2 === 0 ? "bg-secondary" : "bg-muted"} p-6 sm:p-8 flex items-center justify-center min-h-[320px]`}>
+                          {stepVisuals[index]}
                         </div>
                       </motion.div>
                     </div>

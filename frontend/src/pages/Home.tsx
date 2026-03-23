@@ -1,12 +1,11 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState, type ElementType } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
-import { ArrowRight, Search, Shield, Zap, Users } from "lucide-react"
+import { ArrowRight, Search, Shield, Zap, Users, BookOpen, Sofa, Laptop, Bike, Shirt, Utensils, Home as HomeIcon, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
-import { CategoryCard } from "@/components/category-card"
 import { ListingCard } from "@/components/listing-card"
 import { ListingModal, type ListingDetails } from "@/components/listing-modal"
 import { categories, listings } from "@/lib/sample-data"
@@ -14,6 +13,17 @@ import { type Variants } from "framer-motion"
 import { PageTransition, fadeUp, stagger } from "@/src/components/PageTransition"
 
 const ease = [0.25, 0.1, 0.25, 1] as [number, number, number, number]
+
+const categoryIconMap: Record<string, ElementType> = {
+  textbooks: BookOpen,
+  furniture: Sofa,
+  electronics: Laptop,
+  bikes: Bike,
+  clothing: Shirt,
+  kitchen: Utensils,
+  housing: HomeIcon,
+  other: MoreHorizontal,
+}
 
 const heroStagger: Variants = {
   hidden: {},
@@ -25,6 +35,7 @@ const heroItem: Variants = {
 }
 
 export default function HomePage() {
+  const navigate = useNavigate()
   const [selectedListing, setSelectedListing] = useState<ListingDetails | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
@@ -116,17 +127,31 @@ export default function HomePage() {
               </motion.div>
 
               <motion.div
-                className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8"
+                className="grid grid-cols-4 gap-3 md:grid-cols-8"
                 variants={stagger(0.06)}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, margin: "-40px" }}
               >
-                {categories.map((category) => (
-                  <motion.div key={category.name} variants={fadeUp}>
-                    <CategoryCard name={category.name} count={category.count} icon={category.icon} />
-                  </motion.div>
-                ))}
+                {categories.map((category) => {
+                  const Icon = categoryIconMap[category.icon]
+                  return (
+                    <motion.button
+                      key={category.name}
+                      variants={fadeUp}
+                      onClick={() => navigate(`/browse?category=${encodeURIComponent(category.name)}`)}
+                      className="group flex flex-col items-center gap-3 rounded-xl border border-border bg-card px-3 py-6 text-center transition-all hover:border-primary hover:shadow-md"
+                    >
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-secondary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                        <Icon className="h-7 w-7" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-foreground leading-tight">{category.name}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">{category.count} items</p>
+                      </div>
+                    </motion.button>
+                  )
+                })}
               </motion.div>
 
               <Button variant="ghost" asChild className="mt-6 w-full sm:hidden">
@@ -162,7 +187,7 @@ export default function HomePage() {
                 viewport={{ once: true, margin: "-40px" }}
               >
                 {featuredListings.map((listing) => (
-                  <motion.div key={listing.id} variants={fadeUp}>
+                  <motion.div key={listing.id} variants={fadeUp} className="h-full">
                     <ListingCard
                       id={listing.id}
                       title={listing.title}

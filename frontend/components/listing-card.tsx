@@ -33,7 +33,7 @@ export function ListingCard({
 
   return (
     <article
-      className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-all hover:shadow-lg cursor-pointer"
+      className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-200 hover:border-primary/40 hover:shadow-lg cursor-pointer"
       onClick={onClick}
     >
       {/* Image Container */}
@@ -97,7 +97,7 @@ export function ListingCard({
 
         <Button
           size="sm"
-          className="mt-auto w-full gap-2"
+          className="mt-auto w-full gap-2 cursor-pointer transition-all hover:scale-[1.02] hover:shadow-md active:scale-95"
           onClick={(e) => {
             e.stopPropagation()
             navigate(`/trade/${id}`)
