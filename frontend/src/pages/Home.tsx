@@ -67,7 +67,8 @@ export default function HomePage() {
                   variants={heroItem}
                   className="text-balance text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl"
                 >
-                  Buy, Sell & Exchange on Campus
+                  Skip the price tag,
+                  just swap.
                 </motion.h1>
                 <motion.p variants={heroItem} className="mt-6 text-lg text-primary-foreground/80 leading-relaxed">
                   The trusted marketplace for college students. Find textbooks, furniture, electronics, and more from fellow students at your school.

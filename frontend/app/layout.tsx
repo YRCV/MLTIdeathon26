@@ -7,7 +7,7 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'CampusSwap - Buy, Sell & Exchange on Campus',
+  title: 'CampusSwap - Skip the price tag, just swap.',
   description: 'The trusted marketplace for college students to buy, sell, and exchange textbooks, furniture, electronics, and more.',
   generator: 'v0.app',
   icons: {

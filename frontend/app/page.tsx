@@ -35,7 +35,7 @@ export default function HomePage() {
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
               <h1 className="text-balance text-4xl font-bold tracking-tight text-primary-foreground sm:text-5xl md:text-6xl">
-                Buy, Sell & Exchange on Campus
+                Skip the price tag, just swap.
               </h1>
               <p className="mt-6 text-lg text-primary-foreground/80 leading-relaxed">
                 The trusted marketplace for college students. Find textbooks, furniture, electronics, and more from fellow students at your school.
